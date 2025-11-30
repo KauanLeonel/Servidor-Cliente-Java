@@ -1,18 +1,7 @@
 
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
-
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
 
 
 
@@ -25,10 +14,12 @@ public class ServidorMultiCliente {
 
        while(true){
         Socket cliente = servidor.accept();
+        System.out.println("Cliente conectado");
         ThreadLerDados tcn = new ThreadLerDados(cliente);
         tcn.start();
        }
 
+    
     }
 }
 

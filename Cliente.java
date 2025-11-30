@@ -5,43 +5,58 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
-
 public class Cliente {
 
     public static void main(String[] args) throws UnknownHostException, IOException {
-
         Socket cliente = new Socket("127.0.0.1", 12345);
 
-        System.out.println("O cliente se conectou ao servidor!");
-
         Scanner entrada = new Scanner(cliente.getInputStream());
-        ThreadReceptor rc = new ThreadReceptor(entrada);
-        rc.start();
-
+        PrintStream saida = new PrintStream(cliente.getOutputStream());
         Scanner teclado = new Scanner(System.in);
 
-        PrintStream saida = new PrintStream(cliente.getOutputStream());
-
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-
-        System.out.print("Você é o CLIENTE, let the game begin !\n");
-
-        while (teclado.hasNextLine()) {
-            Date hora = Calendar.getInstance().getTime();
-            String dataFormatada = sdf.format(hora);
-
-            saida.println("Cliente ("+dataFormatada+"): " + teclado.nextLine());
+        // Nome,
+        if (entrada.hasNextLine()) {
+            System.out.print(entrada.nextLine());
         }
 
+        saida.println(teclado.nextLine());
+
+        // Endereço,
+        if (entrada.hasNextLine()) {
+            System.out.print(entrada.nextLine());
+        }
+
+        saida.println(teclado.nextLine());
+
+        // CPF,
+        if (entrada.hasNextLine()) {
+            System.out.print(entrada.nextLine());
+        }
+        saida.println(teclado.nextLine());
+
+        // Idade,
+        if (entrada.hasNextLine()) {
+            System.out.print(entrada.nextLine());
+        }
+        saida.println(teclado.nextLine());
+
+        // Altura e
+        if (entrada.hasNextLine()) {
+            System.out.print(entrada.nextLine());
+        }
+        saida.println(teclado.nextLine());
+
+        // Data de Nascimento (use string nesse campo).
+        if (entrada.hasNextLine()) {
+            System.out.print(entrada.nextLine());
+        }
+        saida.println(teclado.nextLine());
+
+        while (entrada.hasNextLine()) { //Lê tudo o que o servidor mandou até fechar
+            System.out.println(entrada.nextLine()); 
+        }
         teclado.close();
         saida.close();
+        entrada.close();
     }
 }
